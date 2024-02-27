@@ -14,3 +14,34 @@
 - Differential Bundling
 - Error Handling
 - Tree shaking - remove unused code
+
+Two Types of export/Import
+
+# Default Export/Import
+
+- export default Componenet
+- import Componenet from "path"
+
+# Named Export/Import
+
+- export const Cmponenet
+- import {componenet} from "path"
+
+# React hooks
+
+- useState() - Superpowerful variable
+- useEffect()
+
+# 2 types of Routing in web
+
+- Client Side Routing
+- Server Side Routing
+
+# Redux ToolKit
+
+- Install Redux toolkit and react-redux
+- Build out Store
+- Connect our store to our app
+- Create Slice(Cart slice)
+- dispatch(action)
+- read the data using selector
