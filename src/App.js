@@ -42,6 +42,7 @@ import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./componenets/Cart";
+import Footer from "./componenets/Footer";
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
@@ -74,7 +75,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: [<Body />, <Footer />],
       },
       {
         path: "/about",
