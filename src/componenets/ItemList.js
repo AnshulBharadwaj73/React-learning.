@@ -15,7 +15,7 @@ const ItemList = ({ items }) => {
       {items.map((item) => (
         <div
           key={item.card.info.id}
-          className=" p-2 m-2 border-b-2 border-gray-200 text-left flex justify-between"
+          className=" p-2 m-2 border-b-2 border-gray-200 text-left "
         >
           <div className="w-9/12">
             <div className=" font-medium">
@@ -29,23 +29,21 @@ const ItemList = ({ items }) => {
             </span>
             <p className=" text-sm">{item.card.info.description}</p>
           </div>
-          {/* <div className="w-3/12">
+          <div className="w-3/12">
             <div className=" absolute">
-              <button className="p-2 mx-16 bg-white shadow-lg ">
-                ADD
-              </button>
+              <button className="p-2 mx-16 bg-white shadow-lg ">ADD</button>
             </div>
             <img
               src={CDN + item.card.info.imageId}
               className=" w-32 md:w-32 lg:w-48 box-border "
             />
-          </div> */}
+          </div>
           <div className="flex-1 relative overflow-hidden">
-            <img
+            {/* <img
               className="w-full h-full object-cover"
               src={CDN + item.card.info.imageId}
               alt="Your Image"
-            />
+            />  */}
 
             {/* <!-- Button at the bottom --> */}
             <button

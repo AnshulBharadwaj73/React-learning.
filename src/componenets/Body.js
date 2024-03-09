@@ -34,31 +34,32 @@ const Body = () => {
 
   const fetchExtraData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.2599333&lng=77.412615&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/api/seo/getListing?lat=23.20911097029021&lng=77.41920261313595"
     );
     const json = await data.json();
-    console.log(json.data);
+    console.log(json.data.success);
     console.log(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
     );
     setListOfRestaurant((prevList) => [
       ...prevList,
-      ...(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ...(json?.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []),
     ]);
 
     setFilteredRestaurant((prevList) => [
       ...prevList,
-      ...(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ...(json?.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []),
     ]);
     console.log(filteredRestaurant);
   };
 
   const fetchData = async () => {
-    console.log(buttonClick);
+    // console.log(buttonClick);
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.2599333&lng=77.412615&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json.data);
@@ -93,7 +94,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter flex">
+      <div className="filter flex justify-between items-center ml-[90px] mr-[100px]">
         <div className="search p-4 m-4">
           <input
             className="border border-solid border-black"
@@ -134,14 +135,14 @@ const Body = () => {
           </button>
         </div>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex ml-[100px] mr-[100px] flex-wrap items-center justify-between overflow-auto">
         {buttonClick ? (
           <>
-            <div className="flex flex-wrap justify-between items-center">
+            <div className="flex flex-wrap justify-between items-center tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:w-full tablet:overflow-y-auto tablet:overflow-x-auto">
               {/* Render the restaurant cards based on filtered data */}
               {filteredRestaurant.map((res) => (
                 <Link key={res?.info?.id} to={"restaurants/" + res?.info?.id}>
-                  <div className="">
+                  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 flex-shrink-0">
                     <RestaurantCard resData={res?.info} />
                   </div>
                 </Link>
@@ -150,7 +151,7 @@ const Body = () => {
           </>
         ) : (
           <>
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:gap-4 tablet:overflow-y-auto tablet:overflow-x-auto laptop:grid laptop:grid-cols-4 laptop:col-span-4 laptop:gap-4 laptop:overflow-y-auto laptop:overflow-x-auto laptop:sticky">
               {/* Render the restaurant cards based on filtered data */}
               {filteredRestaurant.map((res) => (
                 <Link key={res?.info?.id} to={"restaurants/" + res?.info?.id}>
