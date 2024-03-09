@@ -43,6 +43,7 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./componenets/Cart";
 import Footer from "./componenets/Footer";
+import Carsouel from "./componenets/Carsouel";
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
@@ -75,7 +76,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: [<Body />, <Footer />],
+        element: [<Carsouel />, <Body />, <Footer />],
       },
       {
         path: "/about",
