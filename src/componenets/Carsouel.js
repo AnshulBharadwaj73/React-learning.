@@ -31,28 +31,33 @@ const Carsouel = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=23.2599333&lng=77.412615&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle);
+    // console.log(json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle);
     setCarsouel(
       json?.data?.cards[0]?.card?.card?.gridElements?.infoWithStyle?.info
     );
-    console.log(carsouel);
+    // console.log(carsouel);
   };
   return (
     <>
-      <div className="bg-rgb-255-255-255">
+      <div className="bg-rgb-255-255-255  ">
         <div className="flex justify-between items-center mt-9 ml-[100px] mr-[100px] ">
           <div className=" font-bold text-2xl">anshul, whats on your mind?</div>
           <div>
-            <button onClick={prevSlide}>
-              <div className=" bg-slate-200 rounded-lg ">
+            <button
+              className="mr-2 bg-slate-300 rounded-lg disabled:bg-slate-100"
+              onClick={prevSlide}
+              disabled={currIndex == 0}
+            >
+              <div className=" p-2  ">
                 <svg
+                  className=""
                   width="25"
                   height="25"
                   viewBox="0 0 20 20"
                   fill="none"
-                  aria-hidden="true"
-                  strokeColor="rgba(2, 6, 12, 0.92)"
-                  fillColor="rgba(2, 6, 12, 0.92)"
+                  // aria-hidden="true"
+                  // strokeColor="rgba(2, 6, 12, 0.92)"
+                  // fillColor="rgba(2, 6, 12, 0.92)"
                 >
                   <path
                     d="M7.46869 3.43394C7.79171 3.13249 8.29794 3.14998 8.59939 3.473C8.90083 3.79602 8.88334 4.30225 8.56033 4.60369L5.0839 7.84795C4.94511 7.97748 4.82252 8.0921 4.71414 8.19502L15.0937 8.19502C15.5355 8.19502 15.8937 8.5532 15.8937 8.99502C15.8937 9.43685 15.5355 9.79502 15.0937 9.79502L4.6665 9.79502C4.78625 9.90939 4.92436 10.0386 5.08389 10.1875L8.51791 13.3922C8.84092 13.6937 8.8584 14.1999 8.55695 14.5229C8.2555 14.8459 7.74927 14.8634 7.42626 14.5619L3.95463 11.3221C3.54648 10.9413 3.18179 10.601 2.92647 10.2871C2.64873 9.94573 2.41671 9.53755 2.41672 9.01769C2.41672 8.49783 2.64874 8.08965 2.92648 7.74824C3.18181 7.43439 3.54649 7.09412 3.95465 6.7133L7.46869 3.43394Z"
@@ -62,8 +67,12 @@ const Carsouel = () => {
                 </svg>
               </div>
             </button>
-            <button onClick={nextSlide}>
-              <div className="  bg-slate-200 rounded-lg ">
+            <button
+              onClick={nextSlide}
+              disabled={currIndex > 6}
+              className="bg-slate-300 rounded-lg disabled:bg-slate-100"
+            >
+              <div className="p-2">
                 <svg
                   width="25"
                   height="25"
@@ -87,7 +96,7 @@ const Carsouel = () => {
       <div>
         <div className="overflow-hidden mr-[100px]  ml-[100px] relative">
           <div
-            className=" flex h-[250px] w-[3000px] transition-transform duration-200 "
+            className=" flex justify-between h-[250px] w-[4000px] mr-4 transition-transform duration-200 "
             style={{ transform: `translateX(-${currIndex * 250}px)` }}
           >
             {carsouel.map((data, index) => (

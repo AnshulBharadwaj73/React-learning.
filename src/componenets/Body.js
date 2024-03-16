@@ -18,6 +18,7 @@ const Body = () => {
   //   console.log(listOfRestaurant);
   const [searchText, setSearchText] = useState("");
   const [buttonClick, setButtonClick] = useState(false);
+  const [vegButtonColor, setvegButtonColor] = useState(false);
 
   useEffect(() => {
     console.log("useEffect called");
@@ -53,7 +54,7 @@ const Body = () => {
       ...(json?.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || []),
     ]);
-    console.log(filteredRestaurant);
+    // console.log(filteredRestaurant);
   };
 
   const fetchData = async () => {
@@ -74,7 +75,7 @@ const Body = () => {
     );
   };
 
-  console.log(filteredRestaurant);
+  // console.log(filteredRestaurant);
 
   const onlinestatus = useOnlineStatus();
 
@@ -83,11 +84,32 @@ const Body = () => {
 
   const handleFilterClick = () => {
     // Filter the restaurant data and update the state
-    const filterList = filteredRestaurant.map((res) => ({
+    const filterList = listOfRestaurant.map((res) => ({
       cards: res.cards.filter((card) => card?.card?.card?.info?.avgRating >= 4),
     }));
     console.log(filteredRestaurant);
     setFilteredRestaurant(filterList);
+  };
+
+  const isVeg = () => {
+    // console.log(veg);
+    const button = document.getElementById("isVeg");
+    setButtonClick(!buttonClick);
+    if (buttonClick) {
+      const filterVeg = listOfRestaurant.filter(
+        (res) => res?.info?.veg === true
+      );
+      // listOfRestaurant.filter((res) => console.log(res));
+      console.log(filterVeg);
+      console.log(document.getElementById("isVeg"));
+      // setVeg(filterVeg);
+      setFilteredRestaurant(filterVeg);
+      console.log(filteredRestaurant);
+      setvegButtonColor(!vegButtonColor);
+    } else {
+      setvegButtonColor(!vegButtonColor);
+      setFilteredRestaurant(listOfRestaurant);
+    }
   };
 
   return listOfRestaurant.length == 0 ? (
@@ -97,7 +119,7 @@ const Body = () => {
       <div className="filter flex justify-between items-center ml-[90px] mr-[100px]">
         <div className="search p-4 m-4">
           <input
-            className="border border-solid border-black"
+            className="border border-solid border-black pl-2"
             type="text"
             placeholder="Search Restaurant"
             value={searchText}
@@ -120,6 +142,21 @@ const Body = () => {
           >
             Search
           </button>
+          <button
+            id="isVeg"
+            className={`m-1 p-1 pl-3 pr-3 bg-lime-400 rounded-xl ${
+              vegButtonColor ? "bg-green-200" : "bg-slate-400"
+            }`}
+            // onClick={() => {
+            //   const filteredList = listOfRestaurant.filter(
+            //     (res) => res.info.veg === true
+            //   );
+            //   setFilteredRestaurant(filteredList);
+            // }}
+            onClick={() => isVeg()}
+          >
+            Veg
+          </button>
         </div>
         <div className="search p-4 m-4 flex items-center">
           <button
@@ -138,11 +175,11 @@ const Body = () => {
       <div className="flex ml-[100px] mr-[100px] flex-wrap items-center justify-between overflow-auto">
         {buttonClick ? (
           <>
-            <div className="flex flex-wrap justify-between items-center tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:w-full tablet:overflow-y-auto tablet:overflow-x-auto">
+            <div className="flex flex-wrap tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:gap-5 tablet:overflow-y-auto tablet:overflow-x-auto laptop:grid laptop:grid-cols-4 laptop:col-span-4 laptop:gap-12 laptop:overflow-y-auto laptop:overflow-x-auto laptop:sticky">
               {/* Render the restaurant cards based on filtered data */}
               {filteredRestaurant.map((res) => (
                 <Link key={res?.info?.id} to={"restaurants/" + res?.info?.id}>
-                  <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 flex-shrink-0">
+                  <div className="">
                     <RestaurantCard resData={res?.info} />
                   </div>
                 </Link>
@@ -151,7 +188,7 @@ const Body = () => {
           </>
         ) : (
           <>
-            <div className="flex flex-wrap tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:gap-4 tablet:overflow-y-auto tablet:overflow-x-auto laptop:grid laptop:grid-cols-4 laptop:col-span-4 laptop:gap-4 laptop:overflow-y-auto laptop:overflow-x-auto laptop:sticky">
+            <div className="flex flex-wrap tablet:grid tablet:grid-cols-3 tablet:col-span-3 tablet:gap-5 tablet:overflow-y-auto tablet:overflow-x-auto laptop:grid laptop:grid-cols-4 laptop:col-span-4 laptop:gap-5 laptop:gap-x-12 laptop:overflow-y-auto laptop:overflow-x-auto laptop:sticky">
               {/* Render the restaurant cards based on filtered data */}
               {filteredRestaurant.map((res) => (
                 <Link key={res?.info?.id} to={"restaurants/" + res?.info?.id}>
