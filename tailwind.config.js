@@ -3,13 +3,13 @@ module.exports = {
   content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      tablet: "785px",
+      tablet: "1015px",
       // => @media (min-width: 640px) { ... }
 
-      laptop: "1028px",
+      laptop: "1258px",
       // => @media (min-width: 1024px) { ... }
 
-      desktop: "1290px",
+      desktop: "1657px",
       // => @media (min-width: 1280px) { ... }
       sm: "640px",
       // => @media (min-width: 640px) { ... }

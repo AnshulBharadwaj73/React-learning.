@@ -2,7 +2,7 @@ import { CDN } from "../utils/constant";
 
 const CarsouelCard = (props) => {
   const { responseData } = props;
-  console.log(responseData);
+  // console.log(responseData);
 
   return (
     <div className="">

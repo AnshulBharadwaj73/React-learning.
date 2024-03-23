@@ -7,14 +7,16 @@ const RestaurantCard = (props) => {
   //   console.log(name, cuisines);
   //   console.log(resData.resData.cards[3].card.card.info);
   return (
-    <div className="relative m-4 p-4 w-[240px] bg-gray-100 hover:bg-gray-200">
-      <img
-        className="rounded-lg w-[230px] h-48"
-        alt="meghna-food"
-        src={CDN + resData?.cloudinaryImageId}
-      />
+    <div className="relative m-4 p-4 w-[305px] hover:bg-gray-200">
+      <div>
+        <img
+          className="relative rounded-lg w-[280px] h-48"
+          alt="meghna-food"
+          src={CDN + resData?.cloudinaryImageId}
+        />
+      </div>
       <div className="absolute bottom-20 top-[177px] left-3 right-0 text-slate-100 p-2">
-        <h3 className="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis max-w-xs">
+        <h3 className="font-bold  text-lg overflow-hidden whitespace-nowrap text-ellipsis max-w-xs">
           {resData?.aggregatedDiscountInfoV3?.header != undefined
             ? resData?.aggregatedDiscountInfoV3?.header +
               " " +

@@ -38,31 +38,35 @@ import About from "./componenets/About";
 import Contact from "./componenets/Contact";
 import Error from "./componenets/Error";
 import RestaurantMenu from "./componenets/RestaurantMenu";
-import UserContext from "./utils/UserContext";
+// import UserContext from "./utils/UserContext";
+import { UserProvider } from "./utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./componenets/Cart";
 import Footer from "./componenets/Footer";
 import Carsouel from "./componenets/Carsouel";
+import Login from "./componenets/Login";
+import Register from "./componenets/Register";
 
 const AppLayout = () => {
   const [userName, setUserName] = useState();
 
-  useEffect(() => {
-    const data = {
-      name: "Anshul",
-    };
-    setUserName(data.name);
-  }, []);
+  // useEffect(() => {
+  //   const data = {
+  //     name: "Anshul",
+  //   };
+  //   setUserName(data.name);
+  // }, []);
 
   return (
     <Provider store={appStore}>
-      <UserContext.Provider value={{ loggedInUser: userName }}>
+      <UserProvider>
         <div className="app">
           <Header />
+          {/* <Login /> */}
           <Outlet />
         </div>
-      </UserContext.Provider>
+      </UserProvider>
     </Provider>
   );
 };
@@ -88,7 +92,20 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <Login>
+            {" "}
+            <Cart />
+          </Login>
+        ),
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/contact",

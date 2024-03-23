@@ -2,15 +2,17 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { LOGO_URL } from "../utils/constant";
-import UserContext from "../utils/UserContext";
+import UserContext, { UserProvider, useUser } from "../utils/UserContext";
 import { useSelector } from "react-redux";
+import Login from "./Login";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("login");
 
   const onlineStatus = useOnlineStatus();
-  const { loggedInUser } = useContext(UserContext);
-  console.log(loggedInUser);
+  // const { loggedInUser } = useContext(UserProvider);
+  // console.log(loggedInUser);
+  const { userName, setUserName } = useUser();
 
   const cartItems = useSelector((store) => store.cart.items);
   console.log(cartItems);
@@ -40,7 +42,7 @@ const Header = () => {
               <Link to="/contact">Contact Us</Link>
             </li> */}
             <li>
-              <button
+              {/* <button
                 className="login"
                 onClick={() => {
                   btnName == "Login"
@@ -49,9 +51,20 @@ const Header = () => {
                 }}
               >
                 {btnName}
-              </button>
+              </button> */}
+              <li className="px-4">
+                <button>
+                  <Link to="/login">{userName != "" ? userName : "Login"}</Link>
+                </button>
+              </li>
             </li>
-            <li className="px-4">{loggedInUser}</li>
+            {/* <li>
+              <button>
+                <Link to="/register">Register</Link>
+              </button>
+            </li> */}
+
+            {/* <li className="px-4">{loggedInUser}</li> */}
           </ul>
         </div>
       </div>

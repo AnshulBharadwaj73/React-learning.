@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { LOGO_URL } from "../utils/constant";
 import CarsouelCard from "./CarsouelCard";
+import { useUser } from "../utils/UserContext";
 
 const Carsouel = () => {
   const [carsouel, setCarsouel] = useState([]);
 
   const [currIndex, setCurrIndex] = useState(0);
+  const { userName, setUserName } = useUser();
 
   const nextSlide = () => {
     setCurrIndex((prevIndex) => (prevIndex + 1) % carsouel.length);
@@ -41,7 +43,9 @@ const Carsouel = () => {
     <>
       <div className="bg-rgb-255-255-255  ">
         <div className="flex justify-between items-center mt-9 ml-[100px] mr-[100px] ">
-          <div className=" font-bold text-2xl">anshul, whats on your mind?</div>
+          <div className=" font-bold text-2xl">
+            {userName == "" ? "" : userName + ","} what's on your mind?
+          </div>
           <div>
             <button
               className="mr-2 bg-slate-300 rounded-lg disabled:bg-slate-100"
